@@ -31,7 +31,7 @@ class CreateCoursesTable extends Migration
             $table->boolean('previus_rejected')->default(false);
             $table->timestamps();
             $table->softDeletes();
-            
+
         });
     }
 
