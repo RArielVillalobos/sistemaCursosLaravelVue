@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('roles',function (Blueprint $table){
             $table->increments('id');
             $table->string('name');
-            $table->text('descripcion');
+            $table->text('description');
             $table->timestamps();
 
         });
@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->integer('role_id')->unsigned()->default(\App\Role::STUDENT);
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('name');
+            $table->string('last_name')->nullable();
+            $table->string('slug');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('picture');
