@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
         //si algo no va bien
         if (!request()->has('code') || request()->has('denied')) {
-            session()->flash('message', ['danger', __('Inicio de sesion cancelado')]);
+            Session::flash('message', ['danger', __('Inicio de sesion cancelado')]);
             return redirect('login');
 
         }
@@ -74,12 +74,10 @@ class LoginController extends Controller
 
             DB::beginTransaction();
             try{
-                $userNuevo=new User();
-                $userNuevo->name=$socialUser->name;
-                $userNuevo->email=$email;
-                $userNuevo->save();
-
-
+                $userNuevo=User::create([
+                    'name'=>$socialUser->name,
+                    'email'=>$email,
+                ]);
 
 
 
