@@ -44,6 +44,12 @@ class LoginController extends Controller
     }
 
     public function handleProviderCallback(string $driver){
+        //si algo no va bien
+        if(!request()->has('code') || request()->has('denied')){
+            session()->flash('message',['danger',__('Inicio de sesion cancelado')]);
+            return redirect('login');
+
+        }
         $socialUser=Socialite::driver($driver)->user();
         dd($socialUser);
 
