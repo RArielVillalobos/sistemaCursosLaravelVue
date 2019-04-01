@@ -53,6 +53,13 @@ class DatabaseSeeder extends Seeder
         //va a escojer 5 categoria aleatoria de las que pusimos en factory
         factory(\App\Category::class,5)->create();
 
+        //como ya lo tenemos configurado no hace falta pasarle un array
+        //por cada curso creara dos goals(metas)
+        factory(\App\Course::class,50)->create()->each(function(\App\Course $c){
+            $c->goals()->saveMany(factory(\App\Goal::class,2)->create());
+            $c->requirements()->saveMany(factory(\App\Requirement::class,4)->create());
+        });
+
 
 
     }
