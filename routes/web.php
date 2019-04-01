@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('logn/{driver}','Auth\LoginController@redirecToProvider')->name('social_auth');
+//a donde llegaria el usuario
+Route::get('login/{driver}/callback','Auth\LoginController@handleProviderCallback');
 
 Auth::routes();
 
