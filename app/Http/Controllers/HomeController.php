@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,10 +12,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +20,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //withcount devuelve un conteo
+        //with devuelve la relacion entera
+        $courses=Course::withCount(['students'])
+            ->with('category','teacher','reviews')
+            ->where('status',Course::PUBLISHED)
+            //ordenarlos desendentemente
+            ->latest()
+            ->paginate(12);
+
+        dd($courses);
+        return view('home',['courses'=>$courses]);
     }
 }
