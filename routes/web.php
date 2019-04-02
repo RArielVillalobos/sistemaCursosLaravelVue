@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/set_language/{language}','Controller@setLanguage')->name('set_language');
 Route::get('logn/{driver}','Auth\LoginController@redirecToProvider')->name('social_auth');
 //a donde llegaria el usuario
 Route::get('login/{driver}/callback','Auth\LoginController@handleProviderCallback');
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 Auth::routes();
 
