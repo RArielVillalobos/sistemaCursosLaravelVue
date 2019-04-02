@@ -48,6 +48,11 @@ class Course extends Model
     //rechazado
     const REJECTED=3;
 
+    public function pathAttachment(){
+        return "/images/courses/".$this->picture;
+
+    }
+
     public function category(){
         return $this->belongsTo(Category::class)->select('id','name');
     }

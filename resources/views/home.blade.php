@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
        @forelse($courses as $course)
            <div class="col-md-3">
-               {{$course->name}}
+               @include('partials.courses.card_course')
+
+
 
            </div>
 
