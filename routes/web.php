@@ -21,6 +21,14 @@ Route::get('/', function () {
 
 
 Auth::routes();
+//en el array podemos pasar el prefijo, middlewares,etc
+//todas las rutas que esten aca vana  empezar con el prefijo courses
+Route::group(['prefix'=>'courses'],function(){
+    //para acceder directamente al curso ponemos course
+    Route::get('/{course}','CourseController@show')->name('course.detail');
+
+
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 

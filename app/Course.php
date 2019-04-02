@@ -87,4 +87,9 @@ class Course extends Model
     public function getRatingAttribute(){
         return $this->reviews->avg('rating');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
