@@ -14,34 +14,38 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 <!-- Left Side Of Navbar -->
 
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    id="navbarDropdownMenuLink"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                            >
-                                {{ __("Selecciona un idioma") }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a  class="dropdown-item" href="{{route('set_language',['es'])}}">{{__('Español')}}</a>
-                                <a  class="dropdown-item" href="{{route('set_language',['en'])}}">{{__('Ingles')}}</a>
-
-                            </div>
-
-
-                        </li>
-
-                    </ul>
+                <ul class="navbar-nav mr-auto">
 
 
                 </ul>
+
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    @include('partials.navigations.'.\App\User::navigation())
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >
+                            {{ __("Selecciona un idioma") }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a  class="dropdown-item" href="{{route('set_language',['es'])}}">{{__('Español')}}</a>
+                            <a  class="dropdown-item" href="{{route('set_language',['en'])}}">{{__('Ingles')}}</a>
+
+                        </div>
+
+
+                    </li>
+
+
+                </ul>
+
             </div>
         </div>
     </nav>
