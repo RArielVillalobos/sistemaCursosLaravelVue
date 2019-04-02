@@ -48,6 +48,8 @@ class Course extends Model
     //rechazado
     const REJECTED=3;
 
+    protected $withCount=['reviews','students'];
+
     public function pathAttachment(){
         return asset('storage/courses/'.$this->picture);
 
@@ -91,5 +93,13 @@ class Course extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function relatedCourses(){
+        return Course::with('reviews')->whereCategoryId($this->category->id)
+                ->where('id','!=',$this->id)
+                ->latest()
+                ->limit(6)
+                ->get();
     }
 }

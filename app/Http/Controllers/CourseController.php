@@ -14,6 +14,7 @@ class CourseController extends Controller
         //cuando usamos Route Model Binding(cargar modelo desde ruta no podemos usar with sino load)
         //para que se carguen las relaciones debemos usar load y no with
         //asi le decimos que se carguen relaciones adicionales
+        //cuando usamos load la propiedad withCount([]) no funciona, debemos definirlo desde el modelo y lo sacara autoamticamente
         $course->load([
             //sobrescibir al modelo, y mostrar columnas seleccionadas
             'category'=>function($q){
@@ -36,9 +37,12 @@ class CourseController extends Controller
             'reviews.user',
             'teacher'
 
-        ])->withCount(['students','reviews'])->get();
+        ])->get();
 
-        dd($course);
+        //obtenemos los cursos que tienen la misma categoria
+        //la funcion relatedCourse esta definida en el modelo
+        $cursosMismaCategoria=$course->relatedCourses();
+        return view('courses.detail',['course'=>$course,'related'=>$cursosMismaCategoria]);
 
 
 
