@@ -7,7 +7,7 @@
         <h4 class="card-title">{{$course->name}}</h4>
         <hr>
         <div class="row justify-content-center">
-            {{-- Añadir parcial para mostrar el rating --}}
+            @include('partials.courses.rating')
 
         </div>
         <hr>

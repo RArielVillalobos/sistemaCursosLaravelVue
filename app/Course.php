@@ -82,4 +82,9 @@ class Course extends Model
         return $this->belongsTo(Teacher::class);
     }
 
+    //deben empezar por get y finalizar en Attribute
+    //si le pondriamos customRating, luego para acceder deberiamos usar custom_rating
+    public function getRatingAttribute(){
+        return $this->reviews->avg('rating');
+    }
 }
