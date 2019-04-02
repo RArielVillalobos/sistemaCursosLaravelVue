@@ -29,7 +29,7 @@ class HomeController extends Controller
             ->latest()
             ->paginate(12);
 
-        dd($courses);
+
         return view('home',['courses'=>$courses]);
     }
 }
