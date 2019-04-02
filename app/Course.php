@@ -49,7 +49,7 @@ class Course extends Model
     const REJECTED=3;
 
     public function pathAttachment(){
-        return "/images/courses/".$this->picture;
+        return asset('storage/courses/'.$this->picture);
 
     }
 
