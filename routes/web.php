@@ -25,12 +25,12 @@ Auth::routes();
 //todas las rutas que esten aca vana  empezar con el prefijo courses
 Route::group(['prefix'=>'courses'],function(){
     //para acceder directamente al curso ponemos course
-    Route::get('/{course}','CourseController@show')->name('course.detail');
+    Route::get('/{course}','CourseController@show')->name('courses.detail');
 
 
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 /*Route::get('/images/{path}/{attachment}',function ($path,$attachment){
         //retornar a ruta de storage/cursos/attachment

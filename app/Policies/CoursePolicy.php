@@ -30,8 +30,9 @@ class CoursePolicy
     }
 
     public function inscribe(User $user, Course $course){
+        //se va a poder inscribir si no esta inscrito en el curso
         //comprueba si dentro de la relacion n a n alguna de los estudiantes es este estudiante (el usuario actual)
-        return $course->students->contains($user->student->id);
+        return !$course->students->contains($user->student->id);
 
 
     }

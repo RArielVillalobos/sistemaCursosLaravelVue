@@ -1,7 +1,7 @@
 <div class="col-2">
     @auth
         @can('opt_for_course',$course)
-            {{-- si no esta subscrito en algun plan--}}
+            {{-- si no esta subscrito en algun plan o no es admin--}}
             @can('subscribe',\App\Course::class)
                 <a class="btn btn-subscribe btn-bottom btn-block" href="#">
                     <i class="fa fa-bolt">{{__(" Subscribirme")}}</i>
