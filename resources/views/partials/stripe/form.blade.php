@@ -1,4 +1,4 @@
-<form action="{{rpute('subscription.process_subscription')}}" method="POST">
+<form action="{{route('subscription.process_subscription')}}" method="POST">
     @csrf
     <input type="form-control" name="coupon" placeholder="{{__('Tienes un cupon?')}}">
     <input type="hidden" name="type" value="{{$product['type']}}">
