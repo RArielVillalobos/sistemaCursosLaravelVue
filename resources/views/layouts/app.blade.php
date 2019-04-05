@@ -22,9 +22,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @include('partials.navigation')
+    @yield('jumbotron')
     <div id="app">
-        @include('partials.navigation')
-        @yield('jumbotron')
+
+      <stripe-form></stripe-form>
 
         <main class="py-4">
 
