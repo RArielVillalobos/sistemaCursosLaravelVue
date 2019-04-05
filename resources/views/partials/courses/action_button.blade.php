@@ -3,7 +3,7 @@
         @can('opt_for_course',$course)
             {{-- si no esta subscrito en algun plan o no es admin--}}
             @can('subscribe',\App\Course::class)
-                <a class="btn btn-subscribe btn-bottom btn-block" href="#">
+                <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('subscription.plans')}}">
                     <i class="fa fa-bolt">{{__(" Subscribirme")}}</i>
                 </a>
 
