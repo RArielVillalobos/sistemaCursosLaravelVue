@@ -14007,8 +14007,8 @@ module.exports = __webpack_require__(45);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_StripeForm__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_StripeForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_StripeForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_StripeForm_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_StripeForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_StripeForm_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14020,7 +14020,7 @@ __webpack_require__(14);
 
 window.Vue = __webpack_require__(37);
 
-Vue.component('stripe-form', __WEBPACK_IMPORTED_MODULE_0__components_StripeForm___default.a);
+Vue.component('stripe-form', __WEBPACK_IMPORTED_MODULE_0__components_StripeForm_vue___default.a);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -48885,6 +48885,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -48904,6 +48906,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 name: this.name,
                 amount: parseFloat(this.amount),
                 description: this.description
+
             };
         }
     }

@@ -26,7 +26,8 @@ class SubscriptionController extends Controller
 
     }
 
-    public function processSubscription(){
+    public function processSubscription(Request $request){
+
 
     }
 }

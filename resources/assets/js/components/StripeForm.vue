@@ -4,7 +4,9 @@
     </stripe-checkout>
 </template>
 
+
 <script>
+
     import { StripeCheckout } from 'vue-stripe'
     export default {
         components:{
@@ -17,13 +19,16 @@
             description: '',
 
 
+
+
         },
         computed:{
             product(){
                 return {
                     name: this.name,
                     amount: parseFloat(this.amount),
-                    description: this.description
+                    description: this.description,
+
                 }
             }
         }
