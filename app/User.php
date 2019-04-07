@@ -44,9 +44,9 @@ use Laravel\Cashier\Billable;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
-    //laravel cashier
-    use Billable;
+
+    use Notifiable,Billable;
+
 
     protected static function boot()
     {
