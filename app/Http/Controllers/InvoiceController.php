@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use App\User;
-use Laravel\Cashier\Invoice;
+
+
 
 
 class InvoiceController extends Controller
@@ -19,7 +18,7 @@ class InvoiceController extends Controller
     }
 
     public function admin(){
-        $invoices=new Collection();
+
        // dd(auth()->user()->invoices());
         $user=User::find(auth()->user()->id);
         $invoices = $user->invoices();
@@ -32,8 +31,8 @@ class InvoiceController extends Controller
 
     }
 
-    public function download($id){
+    public function download(Request $request,$id){
 
-        dd($id);
+        return $request->user()->downloadInvoice($id,['vendor'=>'Mi empresa','product'=>__('Subscripción')]);
     }
 }
