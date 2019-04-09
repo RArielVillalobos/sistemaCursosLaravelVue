@@ -35,6 +35,7 @@ Route::group(['prefix'=>'subscription'],function (){
     Route::get('plans','SubscriptionController@plans')->name('subscription.plans');
     Route::post('process_subscription','SubscriptionController@processSubscription')->name('subscription.process_subscription');
     Route::get('admin','SubscriptionController@admin')->name('subscription.admin');
+   // Route::post('admin','SubscriptionController@resume')->name('subscription.resume');
 });
 
 Route::get('/', 'HomeController@index')->name('home');
