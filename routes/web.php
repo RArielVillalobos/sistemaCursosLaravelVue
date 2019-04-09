@@ -31,13 +31,23 @@ Route::group(['prefix'=>'courses'],function(){
 
 });
 
-Route::group(['prefix'=>'subscription'],function (){
-    Route::get('plans','SubscriptionController@plans')->name('subscription.plans');
-    Route::post('process_subscription','SubscriptionController@processSubscription')->name('subscription.process_subscription');
-    Route::get('admin','SubscriptionController@admin')->name('subscription.admin');
-    Route::post('resume','SubscriptionController@resume')->name('subscription.resume');
-    Route::post('cancel','SubscriptionController@cancel')->name('subscription.cancel');
+Route::group(['middleware'=>['auth']],function(){
+    Route::group(['prefix'=>'subscription'],function (){
+        Route::get('plans','SubscriptionController@plans')->name('subscription.plans');
+        Route::post('process_subscription','SubscriptionController@processSubscription')->name('subscription.process_subscription');
+        Route::get('admin','SubscriptionController@admin')->name('subscription.admin');
+        Route::post('resume','SubscriptionController@resume')->name('subscription.resume');
+        Route::post('cancel','SubscriptionController@cancel')->name('subscription.cancel');
+    });
+
+    Route::group(['prefix'=>'invoices'],function(){
+        Route::get('/admin','InvoiceController@admin')->name('invoices.admin');
+        Route::get('/{invoice}/download','InvoiceController@download')->name('invoices.download');
+
+    });
 });
+
+
 
 Route::get('/', 'HomeController@index')->name('home');
 
