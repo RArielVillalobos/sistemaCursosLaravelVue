@@ -4,7 +4,7 @@
     <input type="form-control" name="coupon" placeholder="{{__('Tienes un cupon?')}}">
     <input type="hidden" name="type" value="{{$product['type']}}">
     <hr>
-    <stripe-form stripe_key="{{env('STRIPE_KEY')}}" name="{{$product['name']}}" amount="{{$product['amount']}}" description="{{$product['description']}}">
+    <stripe-form stripe_key="{{ config('services.stripe.key') }}" name="{{$product['name']}}" amount="{{$product['amount']}}" description="{{$product['description']}}">
 
     </stripe-form>
 

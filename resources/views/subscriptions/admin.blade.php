@@ -40,7 +40,7 @@
                             <td>{{$subscription->ends_at?$subscription->ends_at->format('d/m/Y'): __('Subscripción activa')}}</td>
                             <td>
                                 @if($subscription->ends_at)
-                                    <form action="{{route('subscriptions.resume')}}" method="post">
+                                    <form action="{{route('subscription.resume')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="plan" value="{{$subscription->name}}">
                                         <button type="submit" class="btn btn-success">{{__('Renaudar')}}</button>

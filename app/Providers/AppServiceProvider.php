@@ -2,8 +2,14 @@
 
 namespace App\Providers;
 
+use App\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Laravel\Cashier\Cashier;
+use Stripe\Stripe;
+
+
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        //Cashier::useCurrency('eur', '€');
         Schema::defaultStringLength(191);
+
     }
 
     /**
@@ -26,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+
     }
 }
