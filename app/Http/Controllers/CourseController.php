@@ -68,7 +68,7 @@ class CourseController extends Controller
 
         })->get();
 
-       
+
         return view('courses.subscribed',['courses'=>$courses]);
     }
 }
