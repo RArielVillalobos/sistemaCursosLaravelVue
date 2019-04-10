@@ -60,4 +60,15 @@ class CourseController extends Controller
         \Mail::to($course->teacher->user)->send(new NewStudentInCourse($course,auth()->user()->name));
         return back()->with('message',['success',__('Inscripto correctamente en el curso')]);
     }
+
+    public function subscribed(){
+        //queremos obtener los cursos cuando tenga estudiantes,
+        $courses=Course::whereHas('students',function($query){
+            $query->where('user_id',auth()->user()->id);
+
+        })->get();
+
+       
+        return view('courses.subscribed',['courses'=>$courses]);
+    }
 }
