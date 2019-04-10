@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewStudentInCourse;
 use Illuminate\Http\Request;
 use App\Course;
 
@@ -49,8 +50,14 @@ class CourseController extends Controller
     }
 
     public function inscribe(Course $course){
+        //ver vista previa del email con markdown
+        //return new NewStudentInCourse($course,'Admin');
         //queremos ingresar a la tabla students e insertar un registro, solo necesitamos pasarle el parametro id del estudiante
         $course->students()->attach(auth()->user()->student->id);
+
+        //hacer el envio del correo
+        //enviamos el email al profesor
+        \Mail::to($course->teacher->user)->send(new NewStudentInCourse($course,auth()->user()->name));
         return back()->with('message',['success',__('Inscripto correctamente en el curso')]);
     }
 }
