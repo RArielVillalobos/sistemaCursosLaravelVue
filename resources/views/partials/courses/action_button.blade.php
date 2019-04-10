@@ -9,7 +9,7 @@
 
             @else
                 @can('inscribe',$course)
-                    <a class="btn btn-subscribe btn-bottom btn-block" href="#">
+                    <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('courses.inscribe',[$course->slug])}}">
                         <i class="fa fa-bolt">{{__(" Inscribirme")}}</i>
                     </a>
 

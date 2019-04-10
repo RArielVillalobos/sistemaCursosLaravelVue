@@ -47,4 +47,10 @@ class CourseController extends Controller
 
 
     }
+
+    public function inscribe(Course $course){
+        //queremos ingresar a la tabla students e insertar un registro, solo necesitamos pasarle el parametro id del estudiante
+        $course->students()->attach(auth()->user()->student->id);
+        return back()->with('message',['success',__('Inscripto correctamente en el curso')]);
+    }
 }
