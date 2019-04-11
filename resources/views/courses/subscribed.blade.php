@@ -15,7 +15,7 @@
 
             @empty
                 <div class="alert alert-dark">
-                    {{__C('Todavia no estas suscrito a un curso')}}
+                    {{__('Todavia no estas suscrito a un curso')}}
                 </div>
 
             @endforelse

@@ -24,8 +24,13 @@ Auth::routes();
 //en el array podemos pasar el prefijo, middlewares,etc
 //todas las rutas que esten aca vana  empezar con el prefijo courses
 Route::group(['prefix'=>'courses'],function(){
-    Route::get('/subscribed','CourseController@subscribed')->name('courses.subscribed')->middleware('auth');
-    Route::get('/{course}/inscribe','CourseController@inscribe')->name('courses.inscribe')->middleware('auth');
+    Route::group(['middleware'=>['auth']],function (){
+        Route::get('/subscribed','CourseController@subscribed')->name('courses.subscribed');
+        Route::get('/{course}/inscribe','CourseController@inscribe')->name('courses.inscribe');
+        Route::post('add_review','CourseControllerqa@ddReview')->name('courses.add_review');
+
+    });
+
     //para acceder directamente al curso ponemos course
     Route::get('/{course}','CourseController@show')->name('courses.detail');
 

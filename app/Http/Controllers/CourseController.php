@@ -71,4 +71,8 @@ class CourseController extends Controller
 
         return view('courses.subscribed',['courses'=>$courses]);
     }
+
+    public function addReview(){
+
+    }
 }

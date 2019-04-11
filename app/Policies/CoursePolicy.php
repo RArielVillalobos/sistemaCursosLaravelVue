@@ -12,6 +12,7 @@ class CoursePolicy
 {
     use HandlesAuthorization;
 
+    //retorna verdero
     //dice si un usuario se puede subscribir o no a un curso
     public function opt_for_course(User $user,Course $course){
         //si el usuario no es profesor o no es el que imparte el curso si puede tomarlo
@@ -20,7 +21,7 @@ class CoursePolicy
 
 
     }
-
+    //retorna verdero
     public function subscribe(User $user){
         //comprobamos que el usuario no sea admin
         //que el usuario no este subscrito a un plan
@@ -28,11 +29,19 @@ class CoursePolicy
 
 
     }
-
+    //retorna verdero si no esta inscrito
     public function inscribe(User $user, Course $course){
         //se va a poder inscribir si no esta inscrito en el curso
         //comprueba si dentro de la relacion n a n alguna de los estudiantes es este estudiante (el usuario actual)
         return !$course->students->contains($user->student->id);
+
+
+    }
+    //retorna verdero(puede hacer la review)
+    public function review(User $user, Course $course){
+        //si todavia no ha hecho una valoracion va a poder usarla
+        //comprueba si dentro de la relacion hay un user_id igual al de autenticado
+        return !$course->reviews->contains('user_id',$user->id);
 
 
     }
