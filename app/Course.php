@@ -86,7 +86,7 @@ class Course extends Model
 
     //deben empezar por get y finalizar en Attribute
     //si le pondriamos customRating, luego para acceder deberiamos usar custom_rating
-    public function getRatingAttribute(){
+    public function getCustomRatingAttribute(){
         return $this->reviews->avg('rating');
     }
 

@@ -22,7 +22,7 @@
 
                         </div>
                         <div class="stats">
-                            @include('partials.courses.rating',['course'=>$relatedCourse])
+                            @include('partials.courses.rating',['rating'=>$relatedCourse->custon_rating])
 
                         </div>
 
