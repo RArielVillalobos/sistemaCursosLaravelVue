@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('courses');
+            $table->foreign('user_id')->references('id')->on('users');
             //presicion de 2
             $table->integer('rating');
             $table->text('comment')->nullable();

@@ -29,7 +29,7 @@
                 <input type="hidden" name="course_id" value="{{$course->id}}">
                 <div class="form-group">
                     <div class="col-12">
-                        <textarea class="form-control" placeholder="{{__('Escribe una reseña')}}" id="message" name="message" rows="8" cols="100">
+                        <textarea class="form-control" placeholder="{{__('Escribe una reseña')}}" id="message" name="message" rows="8" cols="80">
 
                         </textarea>
 
@@ -59,12 +59,14 @@
                 const number=$(this).data('number');
                 $("#rating_form").find('input[name=rating_input]').val(number);
                 rating_selector.find('li i').removeClass('yellow').each(function (index) {
-                    if((index+1)<=number){
+                    index=index+1;
+                    if(index<=number){
                         $(this).addClass('yellow');
                     }
-                    
+
                 })
             });
+
 
         })
     </script>
