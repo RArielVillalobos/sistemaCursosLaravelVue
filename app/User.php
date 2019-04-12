@@ -94,7 +94,7 @@ class User extends Authenticatable
 
     }
     public function teacher(){
-        return $this->hasOne(Student::class);
+        return $this->hasOne(Teacher::class);
 
     }
 

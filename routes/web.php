@@ -70,3 +70,7 @@ Route::get('/', 'HomeController@index')->name('home');
             return Image::make($file)->response();
         }
 });*/
+
+Route::group(['prefix'=>'solicitude'],function (){
+    Route::post('/teacher','SolicitudeController@teacher')->name('solicitude.teacher');
+});
