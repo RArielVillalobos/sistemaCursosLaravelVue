@@ -17,6 +17,16 @@
             <div class="col-md-8">
                 <div class="card-header">
                     {{__('Actualiza tus datos')}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
 
                 </div>
                 <div class="card-body" style="background: white">
@@ -41,7 +51,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{__('Contraseña')}}</label>
                             <div class="col-md-6">
 
-                                <input required autofocus id="password" name="password" type="password"  class="form-control {{$errors->has('password') ? ' is_invalid' :''}}">
+                                <input required autofocus id="password" name="password" type="password"  class="form-control {{$errors->has('password') ? 'is_invalid' :''}}">
 
                                 @if($errors->has('password'))
                                     <span class="invalid-feedback"><strong>{{$errors->first('password')}}</strong></span>
@@ -55,10 +65,10 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{__('Confirma la contraseña')}}</label>
                             <div class="col-md-6">
 
-                                <input  required autofocus id="password-confirm" name="password_confirmation" type="password"  class="form-control {{$errors->has('password') ? ' is_invalid' :''}}">
+                                <input  id="password-confirm" name="password_confirmation" type="password"  class="form-control {{$errors->has('password_confirmation') ? 'is_invalid' :''}}"  required autofocus>
 
-                                @if($errors->has('password'))
-                                    <span class="invalid-feedback"><strong>{{$errors->first('password')}}</strong></span>
+                                @if($errors->has('password_confirmation'))
+                                    <span class="invalid-feedback"><strong>{{$errors->first('password_confirmation')}}</strong></span>
                                 @endif
                             </div>
 

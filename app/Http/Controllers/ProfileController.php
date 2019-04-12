@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\StrengthPassword;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -14,7 +15,19 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request){
-        dd($request->all());
+        $this->validate($request,[
+            //password iguales aun que vengan vacios
+            'password'=>['confirmed',new StrengthPassword]
+        ]);
+
+        //SI PASA LA VALIDACION
+
+        $user=auth()->user();
+        $user->password=bcrypt($request->input('password'));
+        $user->save();
+
+        return back()->with('message',['success',__('Usuario actualizado correctamente')]);
+
 
     }
 }
