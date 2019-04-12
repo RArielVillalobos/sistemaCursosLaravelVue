@@ -52,6 +52,10 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/{invoice}/download','InvoiceController@download')->name('invoices.download');
 
     });
+
+    Route::group(['prefix'=>'profile'],function(){
+            Route::get('/','ProfileController@index')->name('profile.index');
+    });
 });
 
 
