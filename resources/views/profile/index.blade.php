@@ -184,8 +184,8 @@
                    {data:'user.id'},
                    {data:'user.name'},
                    {data:'user.email'},
-                   {data:'courses.formatted'},
-                   {data:'user.actions'}
+                   {data:'courses_formatted'},
+                   {data:'actions'}
                ]
            });
         } );

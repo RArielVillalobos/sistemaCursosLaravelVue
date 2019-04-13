@@ -29,6 +29,7 @@ class Student extends Model
         'user_id',
         'title'
     ];
+    protected $appends=['courses_formatted'];
 
     public function courses(){
         return $this->belongsToMany(Course::class);
@@ -36,5 +37,16 @@ class Student extends Model
 
     public function user(){
         return $this->belongsTo(User::class)->select('id','role_id','name','email');
+    }
+
+    //tiene que empezar con get,tiene que terminar con attribute y tiene que ser lowecase
+    public function getCoursesFormattedAttribute(){
+        //pluck:columnas que queremos devolver
+        //separar todos los registros por una coma
+        //devolvera algo asi u'curso 1','curso 2','curso 3'
+        //pero como tenemos nombres grandes no van a caber en la tabla asi que hacemos un salto de kinea
+        return $this->courses->pluck('name')->implode('<br>');
+
+
     }
 }

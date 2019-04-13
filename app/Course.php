@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Course
@@ -43,6 +44,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     //
+    use SoftDeletes;
     const PUBLISHED=1;
     const PENDING=2;
     //rechazado
