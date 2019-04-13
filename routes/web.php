@@ -74,3 +74,9 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['prefix'=>'solicitude'],function (){
     Route::post('/teacher','SolicitudeController@teacher')->name('solicitude.teacher');
 });
+
+
+Route::group(['prefix'=>'teacher'],function (){
+    Route::get('/courses','TeacherControllerController@courses')->name('teacher.courses');
+    Route::get('students','TeacherController@students')->name('teacher.students');
+});
