@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MessageToStudent;
 use App\Student;
+use App\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -34,7 +36,29 @@ class TeacherController extends Controller
 
     }
 
-    public function sendMessageStudent(){
-        return response()->json(['res'=>true]);
+    public function sendMessageStudent(Request $request){
+        //obteniendo informacion enviada por ajax
+        $info=$request->info;
+        $data=[];
+        //parseamos la informacion que viene de ajax y la pasamos al arreglo, obtendremos un arreglo
+        parse_str($info,$data);
+
+        //buscamos al usuario(el id lo enviamos por ajax)
+       $user= User::find($data['user_id']);
+
+       try{
+
+           \Mail::to($user)->send(New MessageToStudent(auth()->user()->name,$data['message']));
+           $success=true;
+
+
+       }catch (\Exception $e){
+           //guardo mensaje de error, por si ocurre un error y no se que es
+           $error=$e->getMessage();
+           $success=false;
+
+
+       }
+        return response()->json(['res'=>$success]);
     }
 }
