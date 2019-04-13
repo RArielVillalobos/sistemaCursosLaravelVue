@@ -164,30 +164,50 @@
 
 
     <script type="text/javascript">
-        $(document).ready( function () {
+
             let dt;
             let modal=$('#exampleModal');
 
+            $(document).ready( function () {
             //convierte mi tabla en datatables
-           $('#students-table').DataTable({
-               pageLength:5,
-               lengthMenu:[5,10,25,50,75,100],
-               //mensaje de procesamiento
-               processing:true,
-               //que cada vez que ordenemos,busquemos o cualquier otra cosa, la peticion se haga en el servidor
-               serverSide:true,
-               ajax: '{{route('teacher.students')}}',
-               language:{
-                   url :'//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
-               },
-               columns:[
-                   {data:'user.id'},
-                   {data:'user.name'},
-                   {data:'user.email'},
-                   {data:'courses_formatted'},
-                   {data:'actions'}
-               ]
-           });
+               $('#students-table').DataTable({
+                   pageLength:5,
+                   lengthMenu:[5,10,25,50,75,100],
+                   //mensaje de procesamiento
+                   processing:true,
+                   //que cada vez que ordenemos,busquemos o cualquier otra cosa, la peticion se haga en el servidor
+                   serverSide:true,
+                   ajax: '{{route('teacher.students')}}',
+                   language:{
+                       url :'//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+                   },
+                   columns:[
+                       {data:'user.id'},
+                       {data:'user.name'},
+                       {data:'user.email'},
+                       {data:'courses_formatted'},
+                       {data:'actions'}
+                   ]
+               });
+
+           $(document).on('click','.btnEmail',function (e) {
+               e.preventDefault();
+
+               const id=$(this).data('id');
+
+               modal.find('.modal-title').text('{{__('Enviar mensaje')}}');
+               //mostramos el boton de boton
+               modal.find('#modalAction').text('{{__('Enviar mensaje')}}').show();
+               let $form=$("<form id='studentMessage'></form>");
+               //insertar cosas en el medio
+               $form.append(`<input type="hidden" name="user_id" value=${id}>`);
+               $form.append(`<textarea class="form-control" name="message"></textarea>`);
+               //insertar todo en el formulario
+               modal.find('.modal-body').html($form);
+               modal.modal();
+
+
+           })
         } );
     </script>
 
