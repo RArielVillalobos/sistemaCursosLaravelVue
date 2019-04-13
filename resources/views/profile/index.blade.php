@@ -205,9 +205,38 @@
                //insertar todo en el formulario
                modal.find('.modal-body').html($form);
                modal.modal();
-
-
            })
+           $(document).on('click','#modalAction',function(){
+                $.ajax({
+                    url:'{{route('teacher.send_message_to_student')}}',
+                    type: 'POST',
+                    //lo necesita laravel para que procese el token
+                    headers:{
+                        'x-csrf-token':$("meta[name=csrf-token]").attr('content')
+                    },
+                    data:{
+                        //serializa el formulario para ser enviado al servidor
+                        info:$("#studentMessage").serialize()
+                    },
+                    success: (res)=>{
+
+                        var templateOk=`<div class="alert alert-success">{{__('Mensaje enviado correctamente')}}</div>`;
+
+                        var templateError=`<div class="alert alert-danger">{{__('Ha ocurrido un error al enviar el mensaje')}}</div>`;
+
+                        if(res.res){
+                            $('#modalAction').hide();
+                            modal.find('.modal-body').html(templateOk);
+
+                        }else{
+                            modal.find('.modal-body').html(templateError);
+                        }
+
+                    }
+
+
+                })
+           });
         } );
     </script>
 

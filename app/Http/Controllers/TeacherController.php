@@ -33,4 +33,8 @@ class TeacherController extends Controller
 
 
     }
+
+    public function sendMessageStudent(){
+        return response()->json(['res'=>true]);
+    }
 }
