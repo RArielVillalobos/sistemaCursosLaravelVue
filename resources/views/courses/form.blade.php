@@ -25,7 +25,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-sm-4 col-form-label text-md-right">{{__('Nombre del curso')}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="name" id="name" class="form-control{{$errors->has('name')? ' is_invalid' :''}}" value="{{old('name') ?: $course->name}}" required>
+                                    <input type="text" name="name" id="name" class="form-control{{$errors->has('name')? ' is-invalid' :''}}" value="{{old('name') ?: $course->name}}" required>
                                     @if($errors->has('name'))
                                         <span class="invalid-feedback">
                                             <strong>{{$errors->first('name')}}</strong>
@@ -39,7 +39,7 @@
                                     <select name="level_id" id="level_id" class="form-control">
                                         {{--devolvera un array que tendra como clave el nombre e id --}}
                                         @foreach(\App\Level::pluck('name','id') as $id=>$level)
-                                            <option {{old('level_id') === $id || $course->level_id===$id ?'selected' :''}} value="{{$id}}">{{$level}}</option>
+                                            <option {{(int) old('level_id') === $id || $course->level_id===$id ?'selected' :''}} value="{{$id}}">{{$level}}</option>
 
                                         @endforeach
 
@@ -55,7 +55,7 @@
                                     <select name="category_id" id="category_id" class="form-control">
                                         {{--devolvera un array que tendra como clave el nombre e id --}}
                                         @foreach(\App\Category::groupBy('name')->pluck('name','id') as $id=>$category)
-                                            <option {{old('category_id') === $id || $course->category_id===$id ?'selected' :''}} value="{{$id}}">{{$category}}</option>
+                                            <option {{(int) old('category_id') === $id || $course->category_id===$id ?'selected' :''}} value="{{$id}}">{{$category}}</option>
 
                                         @endforeach
 

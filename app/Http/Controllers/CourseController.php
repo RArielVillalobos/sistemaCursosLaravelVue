@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CourseRequest;
 use App\Mail\NewStudentInCourse;
 use Illuminate\Http\Request;
 use App\Course;
@@ -92,5 +93,12 @@ class CourseController extends Controller
         $course=new Course();
         $btnText=__('Enviar Curso para revision');
         return view('courses.form',['course'=>$course,'btnText'=>$btnText]);
+    }
+
+    //con solo pasarle como paramentro el CourseRequest y la instancia, hara toda la validacion completa y cortara la ejecuccion si falla
+    //no tenemos que pasar el Request $request como parametro, porque ya viene en el CourseRequest
+    public function store(CourseRequest $courseRequest){
+        dd($courseRequest->all());
+
     }
 }
