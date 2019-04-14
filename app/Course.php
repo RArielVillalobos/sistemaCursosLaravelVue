@@ -45,11 +45,83 @@ class Course extends Model
 {
     //
     use SoftDeletes;
+
+    protected $fillable=[
+        'teacher_id','name','description','picture','level_id','category_id','status','slug'
+    ];
+
     const PUBLISHED=1;
     const PENDING=2;
     //rechazado
     const REJECTED=3;
 
+
+
+    //queremos guardar y actualizar metas y requerimentos de curso cuando estemos creando un curso o actualizando
+    public static function boot(){
+        parent::boot();
+        //evento Eloquent
+        //da igual se se guarda siendo actualizado o creado
+        //se ejecutara cuando estemos creando o actualizando
+        //si queremos que por ej solo se ejecute cuando actualize debemos usar updated() o created() para guardar en vez de saved()
+
+
+        //antes usaremos saving para poder setear el slug
+        //antes de que se guarde
+       /* static::saving(function(Course $course){
+            if(\App::runningInConsole()){
+                $course->slug=str_slug($course->name,'-');
+
+
+            }
+        });*/
+
+
+        static::saved(function (Course $course){
+            //que no se este ejecutando en consola por ejemplo usando tinker
+            if(!\App::runningInConsole()){
+
+                if(request('requirements')){
+                                                              //tenemos el indice y valor
+                    foreach (request('requirements') as $key=>$requirementInput){
+                        //si no es null
+                        if($requirementInput){
+                            //si no existe lo vamos a crear y sino actualizar
+                            Requirement::updateOrCreate(['id'=>request('requirement_id'.$key)],[
+                                'course_id'=>$course->id,
+                                'requirement'=>$requirementInput,
+
+
+                            ]);
+
+                        }
+                    }
+                }
+                if(request('goals')){
+                    //tenemos el indice y valor
+                    foreach (request('goals') as $key=>$goalInput){
+                        //si no es null
+                        if($goalInput){
+                            //si no existe lo vamos a crear y sino actualizar
+                            Goal::updateOrCreate(['id'=>request('goal_id'.$key)],[
+                                'course_id'=>$course->id,
+                                'goal'=>$goalInput,
+
+
+                            ]);
+
+                        }
+                    }
+                }
+
+            }
+
+        });
+
+
+
+
+    }
     protected $withCount=['reviews','students'];
 
     public function pathAttachment(){

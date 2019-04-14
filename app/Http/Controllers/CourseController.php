@@ -102,12 +102,20 @@ class CourseController extends Controller
         //lo guardara en storage/app/public/courses
         //recoredemos que la funcion estatica retorna el nombre de archivo
         $picture=Helper::uploadFile('picture','courses');
+
         //dentro de la peticion exista una nueva variable que se llame picture , que sera la imagen (el string del nombre q se guardara en bd)
+        //tambien agregamos un teacher_id y un status
         $courseRequest->merge(['picture'=>$picture]);
         $courseRequest->merge(['teacher_id'=>auth()->user()->teacher->id]);
         $courseRequest->merge(['status'=>Course::PENDING]);
+        $courseRequest->merge(['slug'=>str_slug($courseRequest['name'],'-')]);
         //insertara en la bd todos los datos que trae el request, nombre de curso,categoria,nivel,etc
+        //todos los campos del formulario menos el token sino generara error al no estar activado en asignacion masiva o podemos rellenar el la variable fillable en el modelo
+        //Course::create($courseRequest->except('_token'));
         Course::create($courseRequest->input());
+        //recordemos que dentro del modelo Course esta el evento para generar las metas y requisitos cada vez q se actualice o se cree un curso
+
+        return back()->with('message',['success',__('Curso enviado  correctamente,recibira un correo con cualquier información')]);
 
 
 
