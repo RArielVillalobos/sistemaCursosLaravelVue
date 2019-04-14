@@ -37,6 +37,11 @@ Route::group(['prefix'=>'courses'],function(){
             //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
             ->middleware([sprintf("role:%s",\App\Role::TEACHER)]);
 
+        Route::put('update','CourseController@update')->name('courses.update')
+            //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
+            ->middleware([sprintf("role:%s",\App\Role::TEACHER)]);
+
+
 
 
 
