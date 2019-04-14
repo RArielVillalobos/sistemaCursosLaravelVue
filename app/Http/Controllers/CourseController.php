@@ -87,4 +87,10 @@ class CourseController extends Controller
         return back()->with('message',['success',__('Muchas gracias por valorar el curso')]);
 
     }
+
+    public function create(){
+        $course=new Course();
+        $btnText=__('Enviar Curso para revision');
+        return view('courses.form',['course'=>$course,'btnText'=>$btnText]);
+    }
 }

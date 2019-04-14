@@ -29,6 +29,17 @@ Route::group(['prefix'=>'courses'],function(){
         Route::get('/{course}/inscribe','CourseController@inscribe')->name('courses.inscribe');
         Route::post('add_review','CourseController@addReview')->name('courses.add_review');
 
+        Route::get('create','CourseController@create')->name('courses.create')
+                //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
+               ->middleware([sprintf("role:%s",\App\Role::TEACHER)]);
+
+        Route::post('store','CourseController@store')->name('courses.store')
+            //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
+            ->middleware([sprintf("role:%s",\App\Role::TEACHER)]);
+
+
+
+
     });
 
     //para acceder directamente al curso ponemos course

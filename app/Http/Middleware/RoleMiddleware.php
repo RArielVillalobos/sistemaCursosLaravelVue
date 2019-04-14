@@ -15,7 +15,10 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next,$role)
     {
-        if(auth()->user()->role_id!==$role){
+        //como el parametro role viene convertido desde la ruta en un string debemos convertirla en entero
+        if(auth()->user()->role_id !== (int) $role){
+
+
             abort(401,__('No puedes acceder a esta zona'));
 
         }
