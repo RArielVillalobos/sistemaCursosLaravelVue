@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Requests\CourseRequest;
 use App\Mail\NewStudentInCourse;
 use Illuminate\Http\Request;
@@ -98,7 +99,17 @@ class CourseController extends Controller
     //con solo pasarle como paramentro el CourseRequest y la instancia, hara toda la validacion completa y cortara la ejecuccion si falla
     //no tenemos que pasar el Request $request como parametro, porque ya viene en el CourseRequest
     public function store(CourseRequest $courseRequest){
-        dd($courseRequest->all());
+        //lo guardara en storage/app/public/courses
+        //recoredemos que la funcion estatica retorna el nombre de archivo
+        $picture=Helper::uploadFile('picture','courses');
+        //dentro de la peticion exista una nueva variable que se llame picture , que sera la imagen (el string del nombre q se guardara en bd)
+        $courseRequest->merge(['picture'=>$picture]);
+        $courseRequest->merge(['teacher_id'=>auth()->user()->teacher->id]);
+        $courseRequest->merge(['status'=>Course::PENDING]);
+        //insertara en la bd todos los datos que trae el request, nombre de curso,categoria,nivel,etc
+        Course::create($courseRequest->input());
+
+
 
     }
 }
