@@ -29,26 +29,31 @@ Route::group(['prefix'=>'courses'],function(){
         Route::get('/{course}/inscribe','CourseController@inscribe')->name('courses.inscribe');
         Route::post('add_review','CourseController@addReview')->name('courses.add_review');
 
-        Route::get('create','CourseController@create')->name('courses.create')
-                //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
-               ->middleware([sprintf("role:%s",\App\Role::TEACHER)]);
-
-        Route::post('store','CourseController@store')->name('courses.store')
-            //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
-            ->middleware([sprintf("role:%s",\App\Role::TEACHER)]);
-
-        Route::put('update','CourseController@update')->name('courses.update')
-            //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
-            ->middleware([sprintf("role:%s",\App\Role::TEACHER)]);
+        //para pasar un parametro al middleware role, debemos usar la funcion sprintf, y luego el parametro
+        //role es el nombre de middleware
+       Route::group(['middleware'=>[sprintf('role:%s',\App\Role::TEACHER)]],function (){
+           Route::get('create','CourseController@create')->name('courses.create');
 
 
 
+           Route::post('store','CourseController@store')->name('courses.store');
 
 
+
+           Route::put('/{slug}/update','CourseController@update')->name('courses.update');
+
+
+
+           Route::get('{slug}/edit','CourseController@edit')->name('courses.edit');
+
+           Route::put('{course}/update','CourseController@update')->name('courses.update');
+           Route::delete('{course}/destroy','CourseController@destroy')->name('courses.destroy');
+
+       });
     });
 
     //para acceder directamente al curso ponemos course
-    Route::get('/{course}','CourseController@show')->name('courses.detail');
+    Route::get('{course}','CourseController@show')->name('courses.detail');
 
 
 
@@ -73,6 +78,19 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('/','ProfileController@index')->name('profile.index');
             Route::put('/','ProfileController@update')->name('profile.update');
     });
+
+
+
+    Route::group(['prefix'=>'solicitude'],function (){
+        Route::post('/teacher','SolicitudeController@teacher')->name('solicitude.teacher');
+    });
+
+
+    Route::group(['prefix'=>'teacher'],function (){
+        Route::get('/courses','TeacherController@courses')->name('teacher.courses');
+        Route::get('students','TeacherController@students')->name('teacher.students');
+        Route::post('/send_message_to_student','TeacherController@sendMessageStudent')->name('teacher.send_message_to_student');
+    });
 });
 
 
@@ -87,13 +105,3 @@ Route::get('/', 'HomeController@index')->name('home');
         }
 });*/
 
-Route::group(['prefix'=>'solicitude'],function (){
-    Route::post('/teacher','SolicitudeController@teacher')->name('solicitude.teacher');
-});
-
-
-Route::group(['prefix'=>'teacher'],function (){
-    Route::get('/courses','TeacherController@courses')->name('teacher.courses');
-    Route::get('students','TeacherController@students')->name('teacher.students');
-    Route::post('/send_message_to_student','TeacherController@sendMessageStudent')->name('teacher.send_message_to_student');
-});

@@ -21,8 +21,9 @@
                             <div class="stats">
                                 {{$course->created_at->format('d/m/Y')}}
                                 @include('partials.courses.rating',['rating'=>$course->custom_rating])
-
+                                @include('partials.courses.teacher_action_buttons')
                             </div>
+
 
                         </div>
                     </div>
@@ -41,7 +42,14 @@
                 </div>
 
             @endforelse
+
+            <div class="col-md-6">
+                {{$courses->links()}}
+            </div>
+
+
         </div>
 
     </div>
+
 @endsection

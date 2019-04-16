@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Teacher;
 use App\User;
 use App\Course;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -16,7 +17,7 @@ class CoursePolicy
     //dice si un usuario se puede subscribir o no a un curso
     public function opt_for_course(User $user,Course $course){
         //si el usuario no es profesor o no es el que imparte el curso si puede tomarlo
-        return ! $user->teacher||$user->teacher->id !==$course->id;
+        return ! $user->teacher->id||$user->teacher->id !=$course->teacher_id;
 
 
 
@@ -45,6 +46,8 @@ class CoursePolicy
 
 
     }
+
+
 
 
 }

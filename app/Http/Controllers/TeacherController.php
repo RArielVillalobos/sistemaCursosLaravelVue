@@ -15,7 +15,7 @@ class TeacherController extends Controller
     public function courses(){
 
         $courses=Course::withCount(['students'])->with('category','reviews')
-        ->whereTeacherId(auth()->user()->teacher->id)->paginate(12);
+        ->whereTeacherId(auth()->user()->teacher->id)->paginate(10);
 
        // dd($courses);
         return view('teachers.courses',['courses'=>$courses]);
