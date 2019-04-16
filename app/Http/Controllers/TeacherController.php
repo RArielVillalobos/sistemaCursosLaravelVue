@@ -6,12 +6,20 @@ use App\Mail\MessageToStudent;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
+use App\Course;
 
 class TeacherController extends Controller
 {
     //
 
     public function courses(){
+
+        $courses=Course::withCount(['students'])->with('category','reviews')
+        ->whereTeacherId(auth()->user()->teacher->id)->paginate(12);
+
+       // dd($courses);
+        return view('teachers.courses',['courses'=>$courses]);
+
 
     }
 
@@ -61,4 +69,7 @@ class TeacherController extends Controller
        }
         return response()->json(['res'=>$success]);
     }
+
+
+
 }
