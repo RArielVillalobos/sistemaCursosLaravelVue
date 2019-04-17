@@ -154,4 +154,15 @@ class CourseController extends Controller
 
 
     }
+
+    public function destroy(Course $course){
+        try{
+            //se hara un borrado logico
+            $course->delete();
+            return back()->with('message',['success',__('Curso eliminado correctamente')]);
+        }catch (Exception $e){
+            return back()->with('message',['danger',__('Error eliminando el curso')]);
+
+        }
+    }
 }
