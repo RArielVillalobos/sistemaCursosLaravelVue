@@ -17,7 +17,7 @@
         <a class="btn btn-course" href="{{route('courses.detail',['slug'=>$course->slug])}}">
             <i class="fa fa-eye"></i>
         </a>
-        <a class="btn btn-warning btn-course" href="{{route('courses.edit',['slug'=>$course->slug])}}">
+        <a class="btn btn-warning  btn-course" href="{{route('courses.edit',['slug'=>$course->slug])}}">
             <i class="fa fa-pencil">{{__('Editar curso')}}</i>
         </a>
         @include('partials.courses.btn_forms.delete')

@@ -8,6 +8,7 @@ use App\Mail\NewStudentInCourse;
 use Illuminate\Http\Request;
 use App\Course;
 use App\Review;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -116,6 +117,39 @@ class CourseController extends Controller
         //recordemos que dentro del modelo Course esta el evento para generar las metas y requisitos cada vez q se actualice o se cree un curso
 
         return back()->with('message',['success',__('Curso enviado  correctamente,recibira un correo con cualquier información')]);
+
+
+
+    }
+
+    public function edit($slug){
+        //evitar consultas duplicadas
+        $course=Course::with(['requirements','goals'])->withCount(['requirements','goals'])
+        ->whereSlug($slug)->first();
+        $btnText=__('Actualizar curso');
+        return view('courses.form',['course'=>$course,'btnText'=>$btnText]);
+
+
+    }
+
+    public function update (CourseRequest $courseRequest,Course $course){
+        $course_id=$courseRequest->request->all()['course_id'];
+        if($courseRequest->has('picture')){
+            Storage::delete('courses/'.$course->picture);
+            $picture=Helper::uploadFile('picture','courses');
+            $courseRequest->merge(['picture'=>$picture]);
+
+
+        }
+
+        //se actualiza todo el formulario
+
+        //dd($course);
+        $course=Course::find($course_id);
+        $course->fill($courseRequest->input());
+        $course->save();
+
+        return back()->with('message',['success',__('Curso actualizado correctamente')]);
 
 
 

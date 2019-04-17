@@ -7,12 +7,15 @@
 
 @section('content')
     <div class="pl-5 pr-5">
+
+
         <form method="POST" action="{{!$course->id? route('courses.store') : route('courses.update',['slug'=>$course->slug])}}" novalidate enctype="multipart/form-data">
             @if($course->id)
                 @method('PUT')
             @endif
 
             @csrf
+                <input type="hidden" name="course_id" value="{{$course->id}}">
 
             <div class="row justify-content-center">
                 <div class="col-md-8">

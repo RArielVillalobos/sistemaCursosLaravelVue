@@ -68,13 +68,13 @@ class Course extends Model
 
         //antes usaremos saving para poder setear el slug
         //antes de que se guarde
-       /* static::saving(function(Course $course){
+       static::saving(function(Course $course){
             if(\App::runningInConsole()){
                 $course->slug=str_slug($course->name,'-');
 
 
             }
-        });*/
+        });
 
 
         static::saved(function (Course $course){

@@ -15,8 +15,10 @@ class CoursePolicy
 
     //retorna verdero
     //dice si un usuario se puede subscribir o no a un curso
+    //si el usuario  no es el que imparte el curso retorna verdadero osea puede tomar el curso
+
     public function opt_for_course(User $user,Course $course){
-        //si el usuario no es profesor o no es el que imparte el curso si puede tomarlo
+
 
         return !$user->teacher!=null  || $user->teacher->id !=$course->teacher_id;
 
