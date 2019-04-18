@@ -93,7 +93,19 @@ Route::group(['middleware'=>['auth']],function(){
     });
 });
 
+Route::group(['prefix'=>'admin','middleware'=>['auth'=>sprintf('role:%s',\App\Role::ADMIN)]],function(){
+    Route::get('/courses','AdminController@courses')->name('admin.courses');
+    Route::get('/courses_json','AdminController@coursesJson')->name('admin.courses_json');
+    Route::post('/courses/updateStatus','AdminController@updateCourseStatus');
 
+
+    //parte para hacer
+    Route::get('students','AdminController@students')->name('admin.students');
+    Route::get('students_json','AdminController@studentsJson')->name('admin.students_json');
+    Route::get('teachers','AdminController@teachers')->name('admin.teachers');
+    Route::get('teachers_json','AdminControllerT@teachersJson')->name('admin.tachers_json');
+
+});
 
 Route::get('/', 'HomeController@index')->name('home');
 
