@@ -9,7 +9,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import StripeForm from './components/StripeForm';
+import Courses from  './components/Courses';
 Vue.component('stripe-form',StripeForm);
+Vue.component('courses',Courses);
+
 
 
 
