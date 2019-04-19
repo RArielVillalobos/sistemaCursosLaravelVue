@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\EloquentVueTables;
+use App\VueTables\EloquentVueTables;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,14 +14,15 @@ class AdminController extends Controller
     }
 
     public function coursesJson(){
-        if(request()->ajax()){
-            $vueTablse=new EloquentVueTables();
-            $data=$vueTablse->get(new Course,['id','name','status'],['reviews']);
+        //if(request()->ajax()){
+
+            $vueTables=new EloquentVueTables;
+            $data=$vueTables->get(new Course,['id','name','status'],['reviews']);
 
             return response()->json($data);
-        }else{
-            abort(401);
-        }
+        //}else{
+          //  abort(401);
+       // }
 
 
 
