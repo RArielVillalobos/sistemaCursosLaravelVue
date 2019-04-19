@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\EloquentVueTables;
+use App\Mail\CourseApproved;
+use App\Mail\CourseRejected;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -54,12 +56,12 @@ class AdminController extends Controller
         $course=Course::findOrFail($id);
         if($course->status!==Course::PUBLISHED && !$course->previus_approved && $nuevoStatus===Course::PUBLISHED){
             $course->previus_approved=true;
-            //\Mail::to($course->teacher->user)->send(new CourseApproved($course));
+            \Mail::to($course->teacher->user)->send(new CourseApproved($course));
         }
 
         if($course->status!==Course::REJECTED && !$course->previus_rejected && $nuevoStatus===Course::REJECTED){
             $course->previus_rejected=true;
-            //    \Mail::to($course->teacher->user)->send(new CourseRejected($course));
+            \Mail::to($course->teacher->user)->send(new CourseRejected($course));
         }
         if($course->status=$nuevoStatus){
             $course->save();

@@ -28,6 +28,12 @@
                 </thead>
                 <tbody>
                 <tr v-for="curso in arrayCursos" :key="curso.id">
+                    <td v-text="curso.id"></td>
+                    <td v-text="curso.name"></td>
+
+                    <td  v-if="curso.status==1">Publicado</td>
+                    <td v-else-if="curso.status==2">Pendiente</td>
+                    <td v-else-if="curso.status==3">Rechazado</td>
                     <td>
                         <button v-if="curso.status==1" @click="updateStatus(curso,3)" type="button"  class="btn btn-danger btn-block">
                             Rechazar
@@ -39,12 +45,6 @@
 
 
                     </td>
-                    <td v-text="curso.id"></td>
-                    <td v-text="curso.name"></td>
-
-                    <td  v-if="curso.status==1">Publicado</td>
-                    <td v-else-if="curso.status==2">Pendiente</td>
-                    <td v-else-if="curso.status==3">Rechazado</td>
 
 
 

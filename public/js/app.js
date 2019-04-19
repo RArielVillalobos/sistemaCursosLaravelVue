@@ -49297,6 +49297,18 @@ var render = function() {
             "tbody",
             _vm._l(_vm.arrayCursos, function(curso) {
               return _c("tr", { key: curso.id }, [
+                _c("td", { domProps: { textContent: _vm._s(curso.id) } }),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(curso.name) } }),
+                _vm._v(" "),
+                curso.status == 1
+                  ? _c("td", [_vm._v("Publicado")])
+                  : curso.status == 2
+                  ? _c("td", [_vm._v("Pendiente")])
+                  : curso.status == 3
+                  ? _c("td", [_vm._v("Rechazado")])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("td", [
                   curso.status == 1
                     ? _c(
@@ -49334,19 +49346,7 @@ var render = function() {
                         ]
                       ),
                   _vm._v(" \n\n\n\n                ")
-                ]),
-                _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(curso.id) } }),
-                _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(curso.name) } }),
-                _vm._v(" "),
-                curso.status == 1
-                  ? _c("td", [_vm._v("Publicado")])
-                  : curso.status == 2
-                  ? _c("td", [_vm._v("Pendiente")])
-                  : curso.status == 3
-                  ? _c("td", [_vm._v("Rechazado")])
-                  : _vm._e()
+                ])
               ])
             }),
             0
